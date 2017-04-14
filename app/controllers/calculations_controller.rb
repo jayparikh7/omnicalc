@@ -10,14 +10,29 @@ class CalculationsController < ApplicationController
     # The special word the user input is in the string @special_word.
     # ================================================================================
 
+    textarray = @text.split;
 
-    @word_count = "Replace this string with your answer."
+    @word_count = textarray.count;
 
-    @character_count_with_spaces = "Replace this string with your answer."
+    @character_count_with_spaces = @text.length;
 
-    @character_count_without_spaces = "Replace this string with your answer."
+    nospacetext = @text.strip
+    newtext = nospacetext.gsub(" ", "");
 
-    @occurrences = "Replace this string with your answer."
+    @character_count_without_spaces = newtext.length
+
+    count = 0
+    textarray.each do |word|
+      if word == @special_word
+        # increment counter by one
+        # count += 1
+        count = count + 1
+        # Edited code to clarify count was being incremented by one
+      end
+
+    end
+
+    @occurrences = count
 
     # ================================================================================
     # Your code goes above.
@@ -31,6 +46,12 @@ class CalculationsController < ApplicationController
     @years = params[:number_of_years].to_i
     @principal = params[:principal_value].to_f
 
+
+    month = @years * 12;
+    effectiveapr = (@apr/100)/12;
+
+    payment = @principal * (effectiveapr / (1-(1+effectiveapr)**-month))
+
     # ================================================================================
     # Your code goes below.
     # The annual percentage rate the user input is in the decimal @apr.
@@ -38,7 +59,7 @@ class CalculationsController < ApplicationController
     # The principal value the user input is in the decimal @principal.
     # ================================================================================
 
-    @monthly_payment = "Replace this string with your answer."
+    @monthly_payment = payment
 
     # ================================================================================
     # Your code goes above.
@@ -60,12 +81,13 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = "Replace this string with your answer."
-    @minutes = "Replace this string with your answer."
-    @hours = "Replace this string with your answer."
-    @days = "Replace this string with your answer."
-    @weeks = "Replace this string with your answer."
-    @years = "Replace this string with your answer."
+    @seconds = (@ending-@starting).round(2)
+    @minutes = (@seconds/60).round(2)
+    @hours = (@minutes/60).round(2)
+    @days = (@hours/24).round(2)
+
+    @weeks = (@days/7).round(2)
+    @years = (@weeks/52).round(2)
 
     # ================================================================================
     # Your code goes above.
