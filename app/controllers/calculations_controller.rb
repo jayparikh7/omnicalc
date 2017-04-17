@@ -16,20 +16,15 @@ class CalculationsController < ApplicationController
 
     @character_count_with_spaces = @text.length;
 
-    nospacetext = @text.strip
-    newtext = nospacetext.gsub(" ", "");
+    newtext = @text.gsub(" ", "")
 
     @character_count_without_spaces = newtext.length
 
     count = 0
     textarray.each do |word|
-      if word == @special_word
-        # increment counter by one
-        # count += 1
-        count = count + 1
-        # Edited code to clarify count was being incremented by one
+      if word.downcase.gsub(/[^\w]/i, "") == @special_word.downcase
+        count += 1
       end
-
     end
 
     @occurrences = count
@@ -81,13 +76,12 @@ class CalculationsController < ApplicationController
     #   number of seconds as a result.
     # ================================================================================
 
-    @seconds = (@ending-@starting).round(2)
-    @minutes = (@seconds/60).round(2)
-    @hours = (@minutes/60).round(2)
-    @days = (@hours/24).round(2)
-
-    @weeks = (@days/7).round(2)
-    @years = (@weeks/52).round(2)
+    @seconds = @ending-@starting
+    @minutes = @seconds/60
+    @hours = @minutes/60
+    @days = @hours/24
+    @weeks = @days/7
+    @years = @weeks/52
 
     # ================================================================================
     # Your code goes above.
