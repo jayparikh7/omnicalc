@@ -105,6 +105,7 @@ class CalculationsController < ApplicationController
     mean = sum / count
     varsum = 0.0
 
+    # Could use min and max from Enumerable, but decided to write out code
     @numbers.each do |num|
       if num < minnum
         minnum = num
@@ -129,6 +130,18 @@ class CalculationsController < ApplicationController
       median = sortedarray[middle]
     end
 
+    @numbers.each do |count|
+      tempcount = 0
+      popular = 0
+      temp = 0
+      @numbers.each do
+
+
+      end
+    end
+
+    mode = @numbers.max_by { |i| @numbers.count(i)}
+
     @sorted_numbers = sortedarray
 
     @count = count
@@ -149,7 +162,7 @@ class CalculationsController < ApplicationController
 
     @standard_deviation = var**(0.5)
 
-    @mode = "How the fuck do I do this"
+    @mode = mode
 
     # ================================================================================
     # Your code goes above.
