@@ -97,28 +97,59 @@ class CalculationsController < ApplicationController
     # Your code goes below.
     # The numbers the user input are in the array @numbers.
     # ================================================================================
+    minnum = @numbers[0]
+    maxnum = @numbers[0]
+    count = @numbers.count
+    sortedarray = @numbers.sort
+    sum = @numbers.sum
+    mean = sum / count
+    varsum = 0.0
 
-    @sorted_numbers = "Replace this string with your answer."
+    @numbers.each do |num|
+      if num < minnum
+        minnum = num
+      end
 
-    @count = "Replace this string with your answer."
+      if num > maxnum
+        maxnum = num
+      end
 
-    @minimum = "Replace this string with your answer."
+      varsum = varsum + (num - mean)**2.0
 
-    @maximum = "Replace this string with your answer."
+    end
 
-    @range = "Replace this string with your answer."
+    var = varsum / count
 
-    @median = "Replace this string with your answer."
+    if @numbers.count % 2 == 0
+      upper = (@numbers.count / 2).to_i
+      lower = upper-1
+      median = (sortedarray[lower] + sortedarray[upper]) / 2
+    else
+      middle = (@numbers.count / 2).to_i
+      median = sortedarray[middle]
+    end
 
-    @sum = "Replace this string with your answer."
+    @sorted_numbers = sortedarray
 
-    @mean = "Replace this string with your answer."
+    @count = count
 
-    @variance = "Replace this string with your answer."
+    @minimum = minnum
 
-    @standard_deviation = "Replace this string with your answer."
+    @maximum = maxnum
 
-    @mode = "Replace this string with your answer."
+    @range = maxnum - minnum
+
+    @median = median
+
+    @sum = sum
+
+    @mean = mean
+
+    @variance = var
+
+    @standard_deviation = var**(0.5)
+
+    @mode = "How the fuck do I do this"
 
     # ================================================================================
     # Your code goes above.
